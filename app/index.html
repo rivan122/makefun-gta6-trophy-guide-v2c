@@ -3,23 +3,108 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>Leonida Platinum Log — GTA VI Trophy Guide &amp; Tracker</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<div class="sunset-band" aria-hidden="true"></div>
+<header class="masthead">
+  <div>
+    <p class="kicker">Grand Theft Auto VI · PlayStation 5 · fully offline</p>
+    <h1>Leonida Platinum Log</h1>
+    <p class="standfirst">A guide and tracker for all 55 official trophies: your own-words walkthrough for every
+    trophy, the places where published guides disagree shown both ways, count trackers for the long grinds,
+    a six-stage roadmap to the platinum, and a spoiler shield for the story.</p>
+  </div>
+  <div class="progress-card">
+    <div class="progress-ring" id="progressRing"><span id="progressPct">0%</span></div>
+    <p id="progressText">0 of 55 earned</p>
+    <p id="gradeText" class="muted"></p>
+  </div>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
-<script type="module" src="app.js"></script>
+
+<nav class="view-tabs" aria-label="Views">
+  <button type="button" data-view="checklist" class="tab is-active">Checklist</button>
+  <button type="button" data-view="roadmap" class="tab">Roadmap</button>
+  <button type="button" data-view="missables" class="tab">Missables</button>
+  <button type="button" data-view="sources" class="tab">Sources</button>
+</nav>
+
+<section class="toolbar" id="toolbar">
+  <label class="field grow">Search
+    <input id="searchBox" type="search" placeholder="Try: vault, meditation, Cal, drone…">
+  </label>
+  <label class="field">Kind
+    <select id="kindFilter">
+      <option value="all">All kinds</option>
+      <option value="story">Story</option>
+      <option value="missable">Missable</option>
+      <option value="collectibles">Collectibles</option>
+      <option value="activities">Activities</option>
+      <option value="online">Online</option>
+    </select>
+  </label>
+  <label class="field">Grade
+    <select id="gradeFilter">
+      <option value="all">All grades</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+  </label>
+  <label class="field check-field">
+    <input id="spoilerToggle" type="checkbox"> Spoiler shield
+    <span class="hint">hide story names &amp; details until earned</span>
+  </label>
+  <label class="field check-field">
+    <input id="hideDoneToggle" type="checkbox"> Hide earned
+  </label>
+  <div class="field">
+    <span class="field-label">Progress file</span>
+    <div class="btn-row">
+      <button type="button" id="exportBtn">Export progress</button>
+      <label class="btn-like" for="importFile">Import progress</label>
+      <input id="importFile" type="file" accept="application/json,.json" hidden>
+      <button type="button" id="resetBtn" class="danger">Reset</button>
+    </div>
+  </div>
+</section>
+<p id="statusLine" class="status" role="status"></p>
+
+<main>
+  <section id="view-checklist">
+    <p id="resultCount" class="muted"></p>
+    <div id="cardGrid" class="card-grid"></div>
+    <p id="emptyNote" class="empty" hidden>No trophies match those filters. Loosen the search or pick another kind or grade.</p>
+  </section>
+
+  <section id="view-roadmap" hidden>
+    <h2>Roadmap — six stages to the platinum</h2>
+    <p class="muted">The order this log recommends. Each stage lists its trophies in guide order; tick them off here too.</p>
+    <div id="roadmapList"></div>
+  </section>
+
+  <section id="view-missables" hidden>
+    <h2>Missables &amp; at-risk trophies</h2>
+    <p class="muted">One trophy is flagged possibly missable, eight are at risk because their missions or locations are one-time,
+    and three are still unconfirmed. Everything below says when it can be missed and what protects you.</p>
+    <div id="missableList" class="card-grid"></div>
+  </section>
+
+  <section id="view-sources" hidden>
+    <h2>Sources</h2>
+    <p class="muted" id="sourceSummary"></p>
+    <ol id="sourceList" class="source-list"></ol>
+    <p class="muted">Every trophy panel names the sources its guide rests on. Where sources disagree, the panel
+    shows both versions and this log's call — 25 trophies carry such a dispute panel.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Progress lives only in this browser (localStorage) — export it before you clear site data.
+  This is an unofficial fan guide; it uses no Rockstar artwork or logos and needs no network connection.</p>
+</footer>
+<script src="app.js"></script>
 </body>
 </html>
